@@ -1,20 +1,34 @@
-{% set image = page.media.images|first %}
+{% set header_images = page.header.images is defined and page.header.images ? page.header.images : null %}
+{% set images_list = header_images ? header_images|map(i => page.media[i])|map(v => v is defined ? v : null) : page.media.images %}
+{% set offsets = page.header.images_offsets is defined and page.header.images_offsets ? page.header.images_offsets : [] %}
+
+{% set sections = content|raw|split('<!-- SECTION -->') %}
 
 <section class="section modular-text {{ page.header.class }}">
-    <div class="container">
-        <div class="columns {{ page.header.image_align|default('align-right') }}">
-            {% if image %}
-                <div class="column">
-                    {{ content|raw }}
-                </div>
-                <div class="column">
-                    {{ image.html|raw }}
-                </div>
-            {% else %}
-                <div class="column" style="grid-column: 1 / -1;">
-                    {{ content|raw }}
-                </div>
-            {% endif %}
-        </div>
-    </div>
+  <div class="container">
+    {% for section in sections %}
+      {% set img = images_list[loop.index0] is defined and images_list[loop.index0] ? images_list[loop.index0] : null %}
+      {% set offset = offsets[loop.index0] is defined ? offsets[loop.index0] : 0 %}
+
+      {# setze inline-grid auf die Zeile, wenn kein Bild vorhanden ist #}
+      {% set row_class = 'columns section-row ' ~ (page.header.image_align|default('align-right')) ~ (img ? '' : ' no-image') %}
+      {% set row_style = img ? 'margin-top: 15px;' : 'margin-top: 15px; grid-template-columns: 1fr 0fr;' %}
+      <div class="{{ row_class }}" style="{{ row_style }}">
+        {% if img %}
+          <div class="column content-col">
+            {{ section|raw }}
+          </div>
+          <div class="column image-col" style="position:relative;">
+            <figure class="mod-image" style="position:relative; top:{{ offset }}px;">
+              {{ img.html|raw }}
+            </figure>
+          </div>
+        {% else %}
+          <div class="column">
+            {{ section|raw }}
+          </div>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
 </section>
