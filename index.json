@@ -1,0 +1,28 @@
+{
+"packages": {
+"themes": {
+"quark2-nix": [
+{
+"name": "quark2-nix",
+"version": "1.0.1",
+"type": "grav-theme",
+"description": "Custom fork of Quark2",
+"homepage": "https://github.com/Nix-Ka-dev/grav-theme-quark2-nix-version",
+"keywords": ["grav","theme","quark2"],
+"license": "MIT",
+"author": {
+"name": "Dein Name",
+"email": "du@beispiel"
+},
+"url": "https://github.com/Nix-Ka-dev/grav-theme-quark2-nix-version/archive/refs/tags/1.0.3.zip",
+"grav": {
+"release": "1.7.0",
+"compatibility": {
+"grav": ">=1.7.0"
+}
+}
+}
+]
+}
+}
+}
