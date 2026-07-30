@@ -53,6 +53,12 @@
     "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --pico-font-family-display:
     "Cal Sans", "Inter", sans-serif;
+
+  /* Forum Pro headings. Without this the forum falls back to the body font for
+   * its own headings while the unclassed ones under them keep Cal Sans, so a
+   * page title ends up lighter than the subheadings beneath it. Hand it the
+   * display face and forum headings speak the same voice as the rest of Quark. */
+  --forum-font-display: var(--pico-font-family-display);
   --pico-font-family-monospace:
     ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
   --pico-font-size: 16px;
