@@ -1,3 +1,9 @@
+# v1.1.7
+## 07/30/2026
+
+1. [](#improved)
+    * Forum Pro's own headings now use Cal Sans along with the rest of the theme. The forum falls back to the body font when a theme hands it no display face, which left a forum page title looking lighter than the headings sitting under it
+
 # v1.1.6
 ## 07/20/2026
 
