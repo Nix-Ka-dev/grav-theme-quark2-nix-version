@@ -47,6 +47,9 @@
 
   --q2-nav-bg: rgba(255, 255, 255, 0.78);
   --q2-nav-border: rgba(34, 42, 53, 0.08);
+  /* Header row height. Override this and `header-transparent` keeps lining the
+   * hero up with it, since the overlay offset is derived from the same value. */
+  --q2-header-height: 72px;
 
   /* Pico overrides */
   --pico-font-family-sans-serif:
@@ -601,6 +604,16 @@ body.header-transparent #header {
   -webkit-backdrop-filter: none;
   border-bottom-color: transparent;
 }
+
+/* Clearing the background is not enough on its own: the sticky header still
+ * occupies a row in normal flow, so it showed the page background rather than
+ * the hero. Pull the following content up by the header's height so the hero
+ * really does render behind it (Quark 1 got this from `position: fixed`).
+ * Guarded by :has() so pages with no hero keep their content clear of it. */
+body.header-transparent:has(.hero, #blog-hero) #header {
+  margin-bottom: calc(-1 * var(--q2-header-height));
+}
+
 body.header-transparent.scrolled #header {
   background: var(--q2-nav-bg);
   backdrop-filter: saturate(180%) blur(12px);
@@ -608,11 +621,33 @@ body.header-transparent.scrolled #header {
   border-bottom-color: var(--q2-nav-border);
 }
 
+/* header-dark / header-light: pick the header's text colour while it is
+ * transparent over a hero, where the theme's own text colour has nothing to
+ * do with the imagery behind it. Restores the Quark 1 body classes. */
+body.header-dark:not(.scrolled) #header,
+body.header-dark:not(.scrolled) #header a,
+body.header-dark:not(.scrolled) #header .navbar-brand,
+body.header-dark:not(.scrolled) #header .theme-toggle {
+  color: #ffffff;
+}
+body.header-dark:not(.scrolled) #header .navbar-brand svg path {
+  fill: #ffffff;
+}
+body.header-light:not(.scrolled) #header,
+body.header-light:not(.scrolled) #header a,
+body.header-light:not(.scrolled) #header .navbar-brand,
+body.header-light:not(.scrolled) #header .theme-toggle {
+  color: #111111;
+}
+body.header-light:not(.scrolled) #header .navbar-brand svg path {
+  fill: #111111;
+}
+
 #header .navbar {
   display: flex;
   align-items: center;
   gap: 1.5rem;
-  min-height: 72px;
+  min-height: var(--q2-header-height);
   transition: min-height 0.2s ease;
 }
 .header-animated.scrolled #header .navbar {
@@ -2183,11 +2218,36 @@ input:focus {
   max-width: 1100px;
   margin-inline: auto;
 }
+/* Column counts follow the `Layout` option in blueprints/modular/features.yaml:
+ * small = 4 / 3 / 2 and standard = 3 / 2 / 1 across desktop / tablet / phone.
+ * Fixed counts rather than auto-fit, so the chosen layout holds at every width
+ * instead of the track minimum silently deciding it. */
 .modular-features .columns {
   display: grid;
   gap: 1.25rem;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   margin-top: 2.5rem;
+}
+.modular-features[data-layout="standard"] .columns {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (min-width: 640px) {
+  .modular-features .columns {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .modular-features[data-layout="standard"] .columns {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .modular-features .columns {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .modular-features[data-layout="standard"] .columns {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 .modular-features .column {
   background: var(--q2-bg-elev);
