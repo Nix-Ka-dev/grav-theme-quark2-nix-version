@@ -2189,6 +2189,9 @@ input:focus {
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   margin-top: 2.5rem;
 }
+.modular-features[data-layout="standard"] .columns {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
 .modular-features .column {
   background: var(--q2-bg-elev);
   border-radius: var(--q2-radius-md);
