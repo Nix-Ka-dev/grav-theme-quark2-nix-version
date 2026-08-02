@@ -1,3 +1,10 @@
+# v1.1.9
+## 08/02/2026
+
+1. [](#bugfix)
+    * The active menu item is no longer white-on-white in dark mode while the header sits over a hero
+    * Removed a hairline of page background that showed above the hero in light mode before scrolling
+
 # v1.1.8
 ## 08/02/2026
 

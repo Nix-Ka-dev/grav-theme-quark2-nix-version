@@ -606,12 +606,17 @@ body.header-transparent #header {
 }
 
 /* Clearing the background is not enough on its own: the sticky header still
- * occupies a row in normal flow, so it showed the page background rather than
- * the hero. Pull the following content up by the header's height so the hero
- * really does render behind it (Quark 1 got this from `position: fixed`).
+ * occupies a row in normal flow, so what showed through was the page
+ * background rather than the hero. Take it out of flow entirely, which is
+ * where Quark 1 got the overlay from. Doing this with a negative margin
+ * instead leaves the header's 1px border sitting above the hero, and shifts
+ * the page by 12px when `header-animated` shrinks the navbar on scroll.
  * Guarded by :has() so pages with no hero keep their content clear of it. */
 body.header-transparent:has(.hero, #blog-hero) #header {
-  margin-bottom: calc(-1 * var(--q2-header-height));
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
 }
 
 body.header-transparent.scrolled #header {
@@ -624,23 +629,40 @@ body.header-transparent.scrolled #header {
 /* header-dark / header-light: pick the header's text colour while it is
  * transparent over a hero, where the theme's own text colour has nothing to
  * do with the imagery behind it. Restores the Quark 1 body classes. */
+/* Only the bare top-level items: `> ul > li > a` deliberately leaves dropdown
+ * submenu links alone, since those sit on their own panel background rather
+ * than on the hero. */
 body.header-dark:not(.scrolled) #header,
-body.header-dark:not(.scrolled) #header a,
 body.header-dark:not(.scrolled) #header .navbar-brand,
-body.header-dark:not(.scrolled) #header .theme-toggle {
+body.header-dark:not(.scrolled) #header .theme-toggle,
+body.header-dark:not(.scrolled) #header .login-status-wrapper,
+body.header-dark:not(.scrolled) #header .dropmenu > ul > li > a {
   color: #ffffff;
 }
 body.header-dark:not(.scrolled) #header .navbar-brand svg path {
   fill: #ffffff;
 }
 body.header-light:not(.scrolled) #header,
-body.header-light:not(.scrolled) #header a,
 body.header-light:not(.scrolled) #header .navbar-brand,
-body.header-light:not(.scrolled) #header .theme-toggle {
+body.header-light:not(.scrolled) #header .theme-toggle,
+body.header-light:not(.scrolled) #header .login-status-wrapper,
+body.header-light:not(.scrolled) #header .dropmenu > ul > li > a {
   color: #111111;
 }
 body.header-light:not(.scrolled) #header .navbar-brand svg path {
   fill: #111111;
+}
+
+/* The active pill and the hover chip draw their own background, so they keep
+ * the theme's paired text colour instead of the over-hero one. Without this
+ * the active item is white-on-white in dark mode, where the pill is light. */
+body.header-dark:not(.scrolled) #header .dropmenu > ul > li > a.active,
+body.header-light:not(.scrolled) #header .dropmenu > ul > li > a.active {
+  color: var(--q2-text-inverse);
+}
+body.header-dark:not(.scrolled) #header .dropmenu > ul > li > a:hover:not(.active),
+body.header-light:not(.scrolled) #header .dropmenu > ul > li > a:hover:not(.active) {
+  color: var(--q2-text-strong);
 }
 
 #header .navbar {
