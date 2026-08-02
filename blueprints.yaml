@@ -1,7 +1,7 @@
 name: Quark 2
 slug: quark2
 type: theme
-version: 1.1.7
+version: 1.1.8
 description: The modernized Grav default theme — Blades CSS foundation, Cal.com-inspired aesthetic, with light/dark/auto mode and Font Awesome 7 icons.
 icon: meteor
 author:
@@ -88,6 +88,31 @@ form:
     header-transparent:
       type: toggle
       label: Header Transparent (hero pages)
+      help: Lets the hero show through the header until the visitor scrolls.
+      highlight: 0
+      default: 0
+      options:
+        1: PLUGIN_ADMIN.ENABLED
+        0: PLUGIN_ADMIN.DISABLED
+      validate:
+        type: bool
+
+    header-dark:
+      type: toggle
+      label: Header Text Light
+      help: Draws the header text in white while it sits over a dark hero image.
+      highlight: 0
+      default: 0
+      options:
+        1: PLUGIN_ADMIN.ENABLED
+        0: PLUGIN_ADMIN.DISABLED
+      validate:
+        type: bool
+
+    header-light:
+      type: toggle
+      label: Header Text Dark
+      help: Draws the header text in near-black while it sits over a light hero image.
       highlight: 0
       default: 0
       options:

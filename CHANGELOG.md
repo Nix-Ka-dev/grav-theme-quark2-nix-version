@@ -1,3 +1,12 @@
+# v1.1.8
+## 08/02/2026
+
+1. [](#new)
+    * Restored the `header-dark` and `header-light` body classes from the original Quark theme, so you can pick a readable header colour when it sits over a hero image
+2. [](#bugfix)
+    * The `header-transparent` option now actually lets the hero show through the header, instead of only clearing the header's own background ([#21](https://github.com/getgrav/grav-theme-quark2/issues/21))
+    * The Features module's `Layout` option now controls the column count as its description says, giving 4 / 3 / 2 columns for Small and 3 / 2 / 1 for Standard ([#20](https://github.com/getgrav/grav-theme-quark2/pull/20))
+
 # v1.1.7
 ## 07/30/2026
 
