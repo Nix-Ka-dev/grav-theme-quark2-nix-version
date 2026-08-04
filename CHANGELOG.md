@@ -1,3 +1,11 @@
+# v1.1.10
+## 08/04/2026
+
+1. [](#bugfix)
+    * Dropdown menus near the right edge of the window no longer run off-screen, and nested sub-menus now open toward whichever side has room ([#22](https://github.com/getgrav/grav-theme-quark2/issues/22))
+    * Removed the stray horizontal scrollbar that off-screen dropdown panels were adding to every page
+    * The theme no longer ships a rule that kept custom logos out of your site's git repository ([#21](https://github.com/getgrav/grav-theme-quark2/issues/21))
+
 # v1.1.9
 ## 08/02/2026
 
