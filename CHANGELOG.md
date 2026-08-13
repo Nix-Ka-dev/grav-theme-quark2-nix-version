@@ -1,3 +1,10 @@
+# v1.1.11
+## 08/13/2026
+
+1. [](#bugfix)
+    * The appearance toggle's tooltip and screen-reader label are now translatable, instead of always appearing in English ([#23](https://github.com/getgrav/grav-theme-quark2/issues/23))
+    * Every other screen-reader label in the theme, covering the menus, breadcrumbs, pagination and post navigation, is now translatable too
+
 # v1.1.10
 ## 08/04/2026
 
